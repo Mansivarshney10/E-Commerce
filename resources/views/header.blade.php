@@ -10,20 +10,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{ url('product') }}">Shop Now</a>
               </li>
-              {{-- <li class="nav-item">
-                <a class="nav-link active" href="#">Link</a>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{ url('myorders') }}">View Order</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Men</a></li>
-                  <li><a class="dropdown-item" href="#">Women</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li> --}}
             </ul>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
             @guest

@@ -18,18 +18,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&family=Raleway&family=Rubik&display=swap" rel="stylesheet">
 
-        {{-- Custom CSS file --}}
-        {{-- <script src="{{ asset('/css/style.css') }}"></script> --}}
-
     </head>
     <body class="antialiased">
         <div class="container--">
             {{View::make('header')}}
-            {{-- @if(session()::has('msg'))
-            <div class="alter alter-success">
-                {{ session()->get('msg') }}
-            </div>
-            @endif --}}
             @yield('content')
         </div>
          
