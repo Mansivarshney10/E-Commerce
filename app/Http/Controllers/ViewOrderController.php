@@ -19,7 +19,7 @@ class ViewOrderController extends Controller
     public function index() {
         if (Auth::check()) {
             // The user is logged in...
-            $orders = Orders::with('items')->where('user_id','=',Auth::user()->id)->get();
+            $orders = Orders::where('user_id','=',Auth::user()->id)->get();
             // return $orders; 
             return view('my-orders', compact('orders'));
         }

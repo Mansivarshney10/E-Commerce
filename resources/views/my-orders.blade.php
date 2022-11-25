@@ -12,17 +12,26 @@
     <tbody>
         @foreach($orders as $order)
         <tr>
-            {{-- @dd($order);
+            {{-- @dd($order); --}}
             <td>{{$order->order_number}}</td>
 
             @php 
             $items = \App\Models\OrderItem::where('order_id', $order->id)->get();
+            // $product_name = [];
+            $pname2 = [];
+            // dd($items);
+            
+            foreach($items as $item){
+                $item_id = $item->product_id; 
+                $product_name = \App\Models\Product::find($item_id);
+                $pname2[] = $product_name->name;
+
+            }
+            // dd($product_name);
+            $pname = implode(',', $pname2);
             @endphp
 
-            @foreach($items as $item)
-                <td>{{$item}}</td>
-            @endforeach --}}
-            
+            <td>{{$pname}}</td>
             <td>{{$order->item_count}}</td>
             <td>{{$order->status}}</td>
             <td>{{$order->grand_total}}</td>

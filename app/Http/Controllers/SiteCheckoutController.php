@@ -29,7 +29,7 @@ class SiteCheckoutController extends Controller
 
         $order = Orders::create([
             'order_number'      =>  'ORD-'.strtoupper(uniqid()),
-            'user_id'           => auth()->user()->id,
+            'user_id'           =>  auth()->user()->id,
             'status'            =>  'pending',
             'grand_total'       =>  $price,
             'item_count'        =>  $item_count,

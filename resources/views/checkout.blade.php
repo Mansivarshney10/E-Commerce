@@ -72,10 +72,11 @@
                     </div>
                     <div class="col-md-4">
                         @php 
-                        // dd(session()->get('cart', []));
                         $price = 0.0;
+                        $quantity = 0;
                         foreach (session()->get('cart', []) as $p){
                             $price += $p['price']; 
+                            $quantity = $p['quantity'];
                         }
                         @endphp
                         <div class="row">
@@ -87,7 +88,7 @@
                                     <article class="card-body">
                                         <dl class="dlist-align">
                                             <dt>Total cost: </dt>
-                                            <dd class="text-right h5 b"> {{ config('settings.currency_symbol') }}{{ $price }} </dd>
+                                            <dd class="text-right h5 b"> {{ config('settings.currency_symbol') }}{{ $price * $quantity}} </dd>
                                         </dl>
                                     </article>
                                 </div>
