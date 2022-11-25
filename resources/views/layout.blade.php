@@ -25,6 +25,11 @@
     <body class="antialiased">
         <div class="container--">
             {{View::make('header')}}
+            {{-- @if(session()::has('msg'))
+            <div class="alter alter-success">
+                {{ session()->get('msg') }}
+            </div>
+            @endif --}}
             @yield('content')
         </div>
          

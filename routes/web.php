@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SiteCheckoutController;
+use App\Http\Controllers\ViewOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,8 @@ Route::get('user', function () {
     return view('user-Details');
 });
 
+Route::get('myorders', [ViewOrderController::class, 'index']); 
+
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
@@ -36,3 +40,8 @@ Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/checkout', [SiteCheckoutController::class, 'getCheckout'])->name('checkout.index');
+    Route::post('/checkout/order', [SiteCheckoutController::class, 'placeOrder'])->name('checkout.place.order');
+});
