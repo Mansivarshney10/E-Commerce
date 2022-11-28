@@ -99,7 +99,6 @@
     <body class="antialiased">
 
         <div class="container--">
-        {{-- {{View::make('header')}} --}}
         {{View::make('product-layout')}}
         {{View::make('carousel')}}
 

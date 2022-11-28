@@ -1,7 +1,7 @@
 @extends('cart')
 @section('title', 'Checkout')
 @section('content')
-    <section class="section-pagetop bg-dark">
+    <section class="section-pagetop bg-light">
         <div class="container clearfix">
             <h2 class="title-page">Checkout</h2>
         </div>
