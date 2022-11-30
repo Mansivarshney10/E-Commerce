@@ -74,9 +74,13 @@
                         @php 
                         $price = 0.0;
                         $quantity = 0;
+                        $total = 0;
                         foreach (session()->get('cart', []) as $p){
                             $price += $p['price']; 
                             $quantity = $p['quantity'];
+                        }
+                        foreach(session('cart') as $id => $details){
+                            $total += $details['price'] * $details['quantity'];
                         }
                         @endphp
                         <div class="row">
@@ -88,7 +92,7 @@
                                     <article class="card-body">
                                         <dl class="dlist-align">
                                             <dt>Total cost: </dt>
-                                            <dd class="text-right h5 b"> {{ config('settings.currency_symbol') }}{{ $price * $quantity}} </dd>
+                                            <dd class="text-right h5 b"> {{ config('settings.currency_symbol') }}{{ $total}} </dd>
                                         </dl>
                                     </article>
                                 </div>

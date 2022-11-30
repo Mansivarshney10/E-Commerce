@@ -25,15 +25,12 @@ Route::get('user', function () {
     return view('user-Details');
 });
 
-Route::get('myorders', [ViewOrderController::class, 'index']); 
-
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
 Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::get('dashboard', [AuthController::class, 'dashboard']); 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
 
 Route::get('product', [ProductController::class, 'index']);  
 Route::get('cart', [ProductController::class, 'cart'])->name('cart');
@@ -45,3 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', [SiteCheckoutController::class, 'getCheckout'])->name('checkout.index');
     Route::post('/checkout/order', [SiteCheckoutController::class, 'placeOrder'])->name('checkout.place.order');
 });
+
+Route::get('myorders', [ViewOrderController::class, 'index']); 
+
+Route::post('/mail', [SiteCheckoutController::class, 'subscribe']);

@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 use Cart;
 
 use App\Models\Orders;
+use App\Models\Users;
+use App\Mail\Subscribe;
 use App\Models\Product;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class SiteCheckoutController extends Controller
 {
@@ -51,9 +58,6 @@ class SiteCheckoutController extends Controller
             
             foreach ($items as $item)
             {
-                // A better way will be to bring the product id with the cart items
-                // you can explore the package documentation to send product id with the car
-
                 $obj = new OrderItem(); 
                 $obj->order_id=$order->id;
                 $obj->product_id=$item['product_id'];
@@ -61,10 +65,21 @@ class SiteCheckoutController extends Controller
                 $obj->price=$item['price'];
                 $obj->save();
             }
+            
+            $email = Auth::user()->email;
+            $users = User::find([
+                'email' => $email
+            ]); 
+            
+            if ($users) {
+                Mail::to($email)->send(new Subscribe($email));
+                $request->session()->forget('cart');  // 'cart', $cart
+                // session::flush();
+                return redirect()->to('myorders')->withSuccess('Your order has been placed successfully');
+            }
         }
            
-        session::flush();
-        return redirect()->to('/')->with(['msg'=>'Your order has been placed successfully']);
+        // return redirect()->to('/')->with(['msg'=>'Your order has been placed successfully']);
     }
 }
 

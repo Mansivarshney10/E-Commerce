@@ -1,4 +1,13 @@
 @include('layout') <br>
+
+@if (session('success'))
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+</div>
+@endif
+
 <table id="cart" class="table table-hover table-condensed">
     <thead>
         <tr>
