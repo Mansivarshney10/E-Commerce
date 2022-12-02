@@ -28,17 +28,20 @@ class SiteCheckoutController extends Controller
 
         $item_count = 0;
         $price = 0.0;
+        $quantity = 0;
         foreach (session()->get('cart', []) as $p){
             $price += $p['price']; 
+            $quantity = $p['quantity'];
             $item_count++;
         }
+        $total = $price * $quantity;
         $params = $request->all();
 
         $order = Orders::create([
             'order_number'      =>  'ORD-'.strtoupper(uniqid()),
             'user_id'           =>  auth()->user()->id,
             'status'            =>  'pending',
-            'grand_total'       =>  $price,
+            'grand_total'       =>  $total,
             'item_count'        =>  $item_count,
             'payment_status'    =>  0,
             'payment_method'    =>  null,
@@ -73,13 +76,10 @@ class SiteCheckoutController extends Controller
             
             if ($users) {
                 Mail::to($email)->send(new Subscribe($email));
-                $request->session()->forget('cart');  // 'cart', $cart
-                // session::flush();
+                $request->session()->forget('cart');
                 return redirect()->to('myorders')->withSuccess('Your order has been placed successfully');
             }
         }
-           
-        // return redirect()->to('/')->with(['msg'=>'Your order has been placed successfully']);
     }
 }
 

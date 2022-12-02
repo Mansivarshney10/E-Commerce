@@ -12,4 +12,32 @@ class Product extends Model
     protected $fillable = [
         'name', 'price', 'description', 'image'
     ];
+
+
+    public function getProductList(){
+
+        $product = $this->all();
+
+        $returnData = $this->arrangeData($product);
+        return $returnData;
+    }
+
+    public function arrangeData($data){
+
+        $returnData = array();
+
+        foreach($data as $key=>$value){
+            $returnData[] = $value->attributes;
+        }
+
+        return $returnData;
+    }
+
+    public function getCartList($id){
+
+        $product = Product::find($id);
+        return $product;
+
+    }
+    
 }

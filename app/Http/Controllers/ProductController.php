@@ -4,68 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
-{
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
+{ 
     public function index()
     {
-        $products = Product::all();
-        return view('products', compact('products'));
+        $ProductObj = new Product;
+        $productList = $ProductObj->getProductList();
+        return view('products',["products"=>$productList]);
     }
 
-    public function indexItems()
-    {
-        $products = Product::all();
-        return view('/', compact('products'));
-    }
-  
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function cart()
     {
         return view('cart');
     }
-  
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
+
     public function addToCart($id)
     {
-        $product = Product::findOrFail($id);
-          
+        
+        $ProductObj = new Product;
+        $product = $ProductObj->getCartList($id);
         $cart = session()->get('cart', []);
-  
+
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
-                "name" => $product->name,
-                "product_id" => $product->id,
+                "name" => $product['name'],
+                "product_id" => $product['id'],
                 "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->image
+                "price" => $product['price'],
+                "image" => $product['image']
             ];
         }
           
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
+        
     }
-  
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
+    
     public function update(Request $request)
     {
         if($request->id && $request->quantity){
@@ -75,12 +53,7 @@ class ProductController extends Controller
             session()->flash('success', 'Cart updated successfully');
         }
     }
-  
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
+
     public function remove(Request $request)
     {
         if($request->id) {
