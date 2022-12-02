@@ -25,6 +25,10 @@ Route::get('user', function () {
     return view('user-Details');
 });
 
+Route::get('product-display', function () {
+    return view('product-display');
+});
+
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::get('registration', [AuthController::class, 'registration'])->name('register');

@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
     {
         $products = [
             [
-                'name' => 'Samsung Galaxy',
+                'name' => 'Samsung Galaxy S22',
                 'description' => 'Samsung Brand',
                 'image' => 'https://www.91-img.com/pictures/144219-v3-samsung-galaxy-s22-mobile-phone-large-1.jpg',
                 'price' => 100
