@@ -50,3 +50,5 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('myorders', [ViewOrderController::class, 'index']); 
 
 Route::post('/mail', [SiteCheckoutController::class, 'subscribe']);
+
+Route::get('view/{id}', [ProductController::class, 'viewProduct'])->name('view.product');

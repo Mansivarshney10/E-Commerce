@@ -43,6 +43,17 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
         
     }
+
+    public function viewProduct($id)
+    {
+        $ProductObj = new Product;
+        $viewPproduct = $ProductObj->getProductData($id);
+
+        session()->put('view', $viewPproduct);
+        $view = session()->get('view', []);
+
+        return view('product-display',["products"=>$view]);
+    }
     
     public function update(Request $request)
     {

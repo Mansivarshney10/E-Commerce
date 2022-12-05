@@ -37,16 +37,47 @@
 
 </style>
 
+@php 
+$data = session('view');
+
+$disPrice = $data['price'] - $data['productDetails'][0]['discount']/100;
+$emi = number_format((float)$data['price']/12, 2, '.', '');
+
+@endphp
+
 <div class="container">
     <div class="jumbotron">
         <div class="card mb-3 product" style="max-width: 100%;">
             <div class="row g-0">
               <div class="col-md-4">
-                <img src="https://www.91-img.com/pictures/136139-v4-apple-iphone-12-mobile-phone-large-1.jpg" class="img-fluid rounded-start mt-3" alt="...">
-              </div>
+                {{-- <img src="{{ $data['image'] }}" class="img-fluid rounded-start mt-3" alt="..."> --}}
+                
+                <div id="carouselExampleControls" class="carousel slide mt-4 me-3" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ $data['image'] }}" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ $data['image'] }}" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ $data['image'] }}" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+              </div> 
+
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">Iphone 12 (128GB) - Black</h5>
+                  <h5 class="card-title">{{ $data['name'] }} - {{ $data['description'] }}</h5>
 
                   <div class="height-100 container justify-content-center align-items-center">
                     <div>
@@ -63,22 +94,23 @@
                     </div>
                   </div>
 
-                  <p class="discount" style="font-size: 20px">-15% &nbsp; ₹ 425</p>
-                  <s class="price" style="font-size: 18px">₹ 500</s>
-                  <p>Inclusive of all taxes EMI starts at ₹2,671. No Cost EMI available</p>
+                  <p class="discount" style="font-size: 20px">{{ $data['productDetails'][0]['discount'] }}% &nbsp; ₹ {{ $disPrice }}</p>
+                  <s class="price" style="font-size: 18px">₹ {{ $data['price'] }}</s>
+                  <p>Inclusive of all taxes EMI starts at ₹{{ $emi }}. No Cost EMI available</p>
                   <h3> About the Phone </h3>
                   <ul>
-                    <li>6.1-inch (15.5 cm diagonal) Super Retina XDR display</li>
-                    <li>Ceramic Shield, tougher than any smartphone glass</li>
-                    <li>A14 Bionic chip, the fastest chip ever in a smartphone</li>
-                    <li>Advanced dual-camera system with 12MP Ultra Wide and Wide cameras; Night mode, Deep Fusion, Smart HDR 3, 4K Dolby Vision HDR recording</li>
-                    <li>12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording</li>
-                    <li>Industry-leading IP68 water resistance</li>
-                    <li>Supports MagSafe accessories for easy attach and faster wireless charging</li>
-                    <li>iOS with redesigned widgets on the Home screen, all-new App Library, App Clips and more</li>
+                    <li>{{ $data['productDescription'][0]['point_1'] }}</li>
+                    <li>{{ $data['productDescription'][0]['point_2'] }}</li>
+                    <li>{{ $data['productDescription'][0]['point_3'] }}</li>
+                    <li>{{ $data['productDescription'][0]['point_4'] }}</li>
+                    <li>{{ $data['productDescription'][0]['point_5'] }}</li>
+                    <li>{{ $data['productDescription'][0]['point_6'] }}</li>
+                    <li>{{ $data['productDescription'][0]['point_7'] }}</li>
+                    <li>{{ $data['productDescription'][0]['point_8'] }}</li>
                   </ul>
 
-                  <p class="btn-holder"><a href="..." class="btn btn-warning text-center" role="button">Add to cart</a> </p>
+                  <p class="btn-holder"><a href="{{ route('add.to.cart', $data['id']) }}" class="btn btn-warning text-center" role="button">Add to cart</a>
+                  <a href="..." class="btn btn-secondary text-center" role="button" @disabled(true)>Wish list</a></p>
                   
                   <div class="row g-0">
                     <div class="card ms-4" style="width: 10rem;">
