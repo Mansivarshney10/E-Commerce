@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+global $post;
 class ProductController extends Controller
 { 
     public function index()
@@ -47,12 +48,14 @@ class ProductController extends Controller
     public function viewProduct($id)
     {
         $ProductObj = new Product;
-        $viewPproduct = $ProductObj->getProductData($id);
+        $products = $ProductObj->getProductData($id);
+        $ProductNotIn = $ProductObj->productNotIn($id);
 
-        session()->put('view', $viewPproduct);
-        $view = session()->get('view', []);
+        // session()->put('view', $viewProduct);
+        // session()->put('shop', $ProductNotIn);
+        // $view = session()->get('view', []);
 
-        return view('product-display',["products"=>$view]);
+        return view('product-display',["products"=>$products, 'shop'=>$ProductNotIn]);
     }
     
     public function update(Request $request)
@@ -76,4 +79,5 @@ class ProductController extends Controller
             session()->flash('success', 'Product removed successfully');
         }
     }
+
 }

@@ -46,11 +46,15 @@ class Product extends Model
         $product = Product::find($id)->toArray();
         $product['productDetails'] = ProductDetails::where('id', '=', $id)->get()->toArray();
         $product['productDescription'] = ProductDescription::where('id', '=', $id)->get()->toArray();
-        // echo '<pre>';print_r($product);die;
-        // $array = array_merge($product->toArray(), $productDetails->toArray(), $productDescription->toArray());
-        return $product;
+        $product['productImages'] = ProductImages::where('id', '=', $id)->get()->toArray();
 
-        // dd(Response::json($array));
+        return $product;
+    }
+
+    public function productNotIn($id){
+        
+        $product = Product::select("*")->whereNotIn('id', [$id])->get();
+        return $product; 
     }
 
 }

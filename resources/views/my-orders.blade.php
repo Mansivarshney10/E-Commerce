@@ -8,7 +8,7 @@
 </div>
 @endif
 
-<table id="cart" class="table table-hover table-condensed">
+<table id="cart" class="table table-striped table-hover">
     <thead>
         <tr>
             <th style="width:20%">order_id</th>
