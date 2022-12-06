@@ -14,11 +14,17 @@ class orders extends Model
         'first_name', 'last_name', 'address', 'city', 'country', 'post_code', 'phone_number', 'notes'
     ];
 
+    /**
+     * Orders BelongsTo a single User 
+     */
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * One Order can have Many Items for eg: Apple and Samsung
+     */
     public function items()
     {
         return $this->hasMany(OrderItem::class);

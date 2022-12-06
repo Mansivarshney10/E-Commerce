@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 global $post;
 class ProductController extends Controller
 { 
+    /**
+     * Show all products on the shop page
+     */
     public function index()
     {
         $ProductObj = new Product;
@@ -16,11 +19,17 @@ class ProductController extends Controller
         return view('products',["products"=>$productList]);
     }
 
+    /**
+     * Display Products in Cart
+     */
     public function cart()
     {
         return view('cart');
     }
 
+    /**
+     * Add-to-cart Post-function
+     */
     public function addToCart($id)
     {
         
@@ -45,19 +54,21 @@ class ProductController extends Controller
         
     }
 
+    /**
+     * Display other available products in the product-display
+    */
     public function viewProduct($id)
     {
         $ProductObj = new Product;
         $products = $ProductObj->getProductData($id);
         $ProductNotIn = $ProductObj->productNotIn($id);
 
-        // session()->put('view', $viewProduct);
-        // session()->put('shop', $ProductNotIn);
-        // $view = session()->get('view', []);
-
         return view('product-display',["products"=>$products, 'shop'=>$ProductNotIn]);
     }
     
+    /**
+     * Quantity should be updated if there is already a product card
+    */
     public function update(Request $request)
     {
         if($request->id && $request->quantity){
@@ -68,6 +79,9 @@ class ProductController extends Controller
         }
     }
 
+    /**
+     * Remove product
+    */
     public function remove(Request $request)
     {
         if($request->id) {

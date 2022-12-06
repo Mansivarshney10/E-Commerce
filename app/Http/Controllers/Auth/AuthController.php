@@ -12,16 +12,27 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     // 
+    /**
+     * Login View
+     */
     public function index()
     {
         return view('auth.login');
     }
-
+    
+    /**
+     * Registration View
+     */
     public function registration()
     {
         return view('auth.registration');
     }
-
+    
+    /**
+     * 1. Check Validities 
+     * 2. Check Existing User
+     * 3. Get User Login 
+     */
     public function postLogin(Request $request)
     {
         $request->validate([
@@ -37,6 +48,10 @@ class AuthController extends Controller
         return redirect("login")->withSuccess('Oppss! You have entered invalid credentials');
     }
 
+    /**
+     * 1. Check Validities 
+     * 2. Get User Register
+     */
     public function postRegistration(Request $request){
         $request->validate([
             'name' => 'required',
@@ -57,6 +72,10 @@ class AuthController extends Controller
         return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
 
+    /**
+     * 1. Display Successfull Login messege
+     * 2. Display Successfull Register messege
+     */
     public function dashboard()
     {
         if(Auth::check()){
@@ -75,6 +94,9 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Logout - Session Break
+     */
     public function logout(){
         Auth::logout();
 

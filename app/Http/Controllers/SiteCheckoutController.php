@@ -20,10 +20,19 @@ use Illuminate\Support\Facades\Validator;
 class SiteCheckoutController extends Controller
 {
     //
+    /**
+     * Display Check out page.
+     */
     public function getCheckout() {
         return view('checkout');
     }
 
+    /**
+     * 1. Place Order
+     * 2. Get Order Details in orders table
+     * 3. Empty cart
+     * 4. Send successfull order placed mail
+     */
     public function placeOrder(Request $request){
 
         $item_count = 0;

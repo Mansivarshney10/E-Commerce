@@ -11,11 +11,17 @@ use Illuminate\Http\Request;
 
 class ViewOrderController extends Controller
 {
+    /**
+     * Make sure the user is available
+     */
     public function __construct() {
     // Middleware only applied to these methods
         $this->middleware('auth');
     }
 
+    /**
+     * Display Order Details for logged-in users
+     */
     public function index() {
         if (Auth::check()) {
             // The user is logged in...

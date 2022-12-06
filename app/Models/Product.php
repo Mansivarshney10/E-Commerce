@@ -8,13 +8,18 @@ use Response;
 
 class Product extends Model
 {
-    use HasFactory;
+    /**
+     * It is a trait that links a Eloquent model to a model factory
+     */
+    use HasFactory; 
 
     protected $fillable = [
         'name', 'price', 'description', 'image'
     ];
 
-
+    /**
+     * Get all product data from the table
+     */
     public function getProductList(){
 
         $product = $this->all();
@@ -23,6 +28,9 @@ class Product extends Model
         return $returnData;
     }
 
+    /**
+     * Foreach loop for storing data in an array
+     */
     public function arrangeData($data){
 
         $returnData = array();
@@ -34,6 +42,9 @@ class Product extends Model
         return $returnData;
     }
 
+    /**
+     * Find Product By ID
+     */
     public function getCartList($id){
 
         $product = Product::find($id);
@@ -41,6 +52,9 @@ class Product extends Model
 
     }
 
+    /**
+     * Joining Product, ProductDetails, ProductDescription, ProductImages to return values on Product-Display
+     */
     public function getProductData($id){
 
         $product = Product::find($id)->toArray();
@@ -51,6 +65,9 @@ class Product extends Model
         return $product;
     }
 
+    /**
+     * Displaying results for products other than what the user selected
+     */
     public function productNotIn($id){
         
         $product = Product::select("*")->whereNotIn('id', [$id])->get();
