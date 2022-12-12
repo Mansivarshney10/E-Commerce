@@ -11,7 +11,7 @@ class ProductController extends Controller
 { 
     /**
      * Show all products on the shop page
-     */
+    */
     public function index()
     {
         $ProductObj = new Product;
@@ -21,7 +21,7 @@ class ProductController extends Controller
 
     /**
      * Display Products in Cart
-     */
+    */
     public function cart()
     {
         return view('cart');
@@ -29,7 +29,7 @@ class ProductController extends Controller
 
     /**
      * Add-to-cart Post-function
-     */
+    */
     public function addToCart($id)
     {
         
@@ -71,7 +71,8 @@ class ProductController extends Controller
     */
     public function update(Request $request)
     {
-        if($request->id && $request->quantity){
+        // PHP super global variable which is used to collect data after submitting an HTML form
+        if($request->id && $request->quantity){     
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
@@ -84,6 +85,7 @@ class ProductController extends Controller
     */
     public function remove(Request $request)
     {
+        // PHP super global variable which is used to collect data after submitting an HTML form
         if($request->id) {
             $cart = session()->get('cart');
             if(isset($cart[$request->id])) {

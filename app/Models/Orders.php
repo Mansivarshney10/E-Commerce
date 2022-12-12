@@ -16,7 +16,7 @@ class orders extends Model
 
     /**
      * Orders BelongsTo a single User 
-     */
+    */
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -24,7 +24,7 @@ class orders extends Model
 
     /**
      * One Order can have Many Items for eg: Apple and Samsung
-     */
+    */
     public function items()
     {
         return $this->hasMany(OrderItem::class);

@@ -56,9 +56,9 @@ $emi = number_format((float)$data['price']/12, 2, '.', '');
         <div class="card mb-3 product" style="max-width: 100%;">
             <div class="row g-0">
               <div class="col-md-4">
-                  <img src="{{ $data['image'] }}" class="img-fluid rounded-start mt-3" alt="...">
+                  {{-- <img src="{{ $data['image'] }}" class="img-fluid rounded-start mt-3" alt="..."> --}}
                 
-                {{-- <div id="carouselExampleControls" class="carousel slide mt-4" data-bs-ride="carousel">
+                <div id="carouselExampleControls" class="carousel slide mt-4" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="{{ $data['image'] }}" alt="...">
@@ -87,7 +87,7 @@ $emi = number_format((float)$data['price']/12, 2, '.', '');
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
-                </div>   --}}
+                </div>  
               </div>
 
               <div class="col-md-8">

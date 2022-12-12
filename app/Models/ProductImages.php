@@ -9,7 +9,7 @@ class ProductImages extends Model
 {
     /**
      * It is a trait that links a Eloquent model to a model factory
-     */
+    */
     use HasFactory;
     
     protected $table = 'product_images';

@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 use Cart;
 
-use App\Models\Orders;
+use App\Models\User;
 use App\Models\Users;
+use App\Models\Orders;
 use App\Mail\Subscribe;
 use App\Models\Product;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +22,7 @@ class SiteCheckoutController extends Controller
     //
     /**
      * Display Check out page.
-     */
+    */
     public function getCheckout() {
         return view('checkout');
     }
@@ -32,7 +32,7 @@ class SiteCheckoutController extends Controller
      * 2. Get Order Details in orders table
      * 3. Empty cart
      * 4. Send successfull order placed mail
-     */
+    */
     public function placeOrder(Request $request){
 
         $item_count = 0;

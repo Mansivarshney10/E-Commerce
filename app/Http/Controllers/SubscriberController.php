@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\Subscribe;
 use App\Models\Subscriber;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,6 +14,9 @@ class SubscriberController extends Controller
     //
     public function subscribe(Request $request) 
     {
+        /** 
+         * Unique Email Address
+        */
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:subscribers'
         ]);
