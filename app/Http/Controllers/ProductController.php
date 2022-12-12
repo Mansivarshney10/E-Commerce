@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-global $post;
+
 class ProductController extends Controller
 { 
     /**
