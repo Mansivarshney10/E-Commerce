@@ -59,10 +59,11 @@ class Product extends Model
     */
     public function  getProductData($id){
 
-        $product = $this->find($id)->toArray();
-        $product['productDetails'] = ProductDetails::where('id', '=', $id)->get()->toArray();
+        $product = $this->find($id)->toArray();  // find() to retrieve row by id.
+        $product['productDetails'] = ProductDetails::where('id', '=', $id)->get()->toArray();  
         $product['productDescription'] = ProductDescription::where('id', '=', $id)->get()->toArray();
         $product['productImages'] = ProductImages::where('id', '=', $id)->get()->toArray();
+        // get() to retrieve all the rows that fit the where clauses
 
         return $product;
 
@@ -73,7 +74,7 @@ class Product extends Model
     */
     public function productNotIn($id){
         
-        $product = $this->select("*")->whereNotIn('id', [$id])->get();
+        $product = $this->select("*")->whereNotIn('id', [$id])->get(); // whereNotIN() to retrieve data except the ID selected
         $returnData = $this->arrangeData($product);
 
         return $returnData;

@@ -50,7 +50,7 @@ class ProductController extends Controller
         }
           
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('success', 'Product added to cart successfully!'); // Back() used to create a redirect response to the user's previous location
         
     }
 
@@ -71,7 +71,7 @@ class ProductController extends Controller
     */
     public function update(Request $request)
     {
-        // PHP super global variable which is used to collect data after submitting an HTML form
+        // $request object-oriented way to interact with the current HTTP request being handled by your application
         if($request->id && $request->quantity){     
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
@@ -85,12 +85,12 @@ class ProductController extends Controller
     */
     public function remove(Request $request)
     {
-        // PHP super global variable which is used to collect data after submitting an HTML form
+        // $request object-oriented way to interact with the current HTTP request being handled by your application
         if($request->id) {
             $cart = session()->get('cart');
             if(isset($cart[$request->id])) {
-                unset($cart[$request->id]);
-                session()->put('cart', $cart);
+                unset($cart[$request->id]); // unset() destroys the specified variables.
+                session()->put('cart', $cart); // Update Session.
             }
             session()->flash('success', 'Product removed successfully');
         }

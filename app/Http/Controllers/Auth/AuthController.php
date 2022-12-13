@@ -33,6 +33,7 @@ class AuthController extends Controller
      * 2. Check Existing User
      * 3. Get User Login 
      */
+    // $request object-oriented way to interact with the current HTTP request being handled by your application
     public function postLogin(Request $request)
     {
         $request->validate([
@@ -41,7 +42,9 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
+        // attempt() accepts an array of key / value pairs as its first argument
         if (Auth::attempt($credentials)) {
+            // intended() redirect the user to the URL they were attempting to access before being intercepted by the authentication middleware
             return redirect()->intended('dashboard')->withSuccess('You have successfully loggedin');
         }
 
@@ -52,6 +55,7 @@ class AuthController extends Controller
      * 1. Check Validities 
      * 2. Get User Register
      */
+    // $request object-oriented way to interact with the current HTTP request being handled by your application
     public function postRegistration(Request $request){
         $request->validate([
             'name' => 'required',

@@ -26,6 +26,8 @@ class ViewOrderController extends Controller
         if (Auth::check()) {
             // The user is logged in...
             $orders = Orders::where('user_id','=',Auth::user()->id)->get();
+
+            // compact() to convert given variable to to array
             return view('my-orders', compact('orders'));
         }
     }
