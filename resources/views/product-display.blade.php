@@ -44,7 +44,6 @@
 
 @php 
 $data = $products;
-$shop = $shop;
 
 $disPrice = $data['price'] - $data['productDetails'][0]['discount']/100;
 $emi = number_format((float)$data['price']/12, 2, '.', '');
@@ -125,7 +124,6 @@ $emi = number_format((float)$data['price']/12, 2, '.', '');
                   </ul>
 
                   <p class="btn-holder"><a href="{{ route('add.to.cart', $data['id']) }}" class="btn btn-warning text-center" role="button">Add to cart</a></p>
-                  {{-- <a href="..." class="btn btn-secondary text-center" role="button" @disabled(true)>Wish list</a></p> --}}
                   
                   
                   <div class="row g-0">
